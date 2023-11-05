@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <title>homework3-stars</title>
+    <style>
+        p {
+            margin-top: 50px;
+
+        }
+
+        .star {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            background-image: url('../JSlesson/Lab06/Images/chngstar.gif');
+            background-size: cover;
+            cursor: pointer;
+        }
+
+        .starGray {
+            background-image: url('../JSlesson/Lab06/Images/star.gif');
+        }
+
+        .current_score {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span class="star" value="1"></span>
+        <span class="star" value="2"></span>
+        <span class="star" value="3"></span>
+        <span class="star" value="4"></span>
+        <span class="star" value="5"></span>
+    </div>
+    <p>單擊星星可評分，雙擊可重置評分</p>
+    <div class="current_score">目前的分數為：0顆星星</div>
+    <script>
+        const stars = document.querySelectorAll('.star');//透過類別取得所有星星元素
+        const currentScore = document.querySelector('.current_score');//取得評分顯示
+
+        let selectedScore = 0;//初始化評分
+
+        stars.forEach(star => {
+            star.addEventListener('click', Click);
+            star.addEventListener('mouseover', MouseOver);//移入
+            star.addEventListener('mouseout', MouseOut);//移出
+            star.addEventListener('dblclick', DoubleClick);//雙擊
+        });
+
+        function Click(event) {
+            selectedScore = event.target.getAttribute('value');//取得單擊的value
+            updateScore(selectedScore);//將value傳給函式
+        }
+
+        function MouseOver(event) {
+            const stopStar = event.target.getAttribute('value');
+            lightStars(stopStar);
+            updateScore(stopStar);
+        }
+
+        function MouseOut() {
+            resetStars();
+            lightStars(selectedScore); // 顯示已選擇的星星
+            updateScore(selectedScore); // 維持目前已選擇的評分
+        }
+
+        function DoubleClick() {
+            selectedScore = 0; //雙擊初始化星星
+            resetStars();
+            updateScore(selectedScore);
+        }
+
+        function resetStars() {
+            stars.forEach(star => {
+                star.classList.remove('starGray'); //重置樣式，移除暗掉的星星
+            });
+        }
+
+        function lightStars(value) {
+            stars.forEach(star => {
+                const starValue = star.getAttribute('value');
+                if (starValue <= value) {
+                    star.classList.remove('starGray');
+                } else {
+                    star.classList.add('starGray');
+                }
+            });
+        }
+        function updateScore(score) {
+            currentScore.textContent = `現在的分數是:${score}顆星星`;
+        }
+    </script>
+</body>
+
+</html>

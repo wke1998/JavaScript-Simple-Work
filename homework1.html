@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <title>homework1</title>
+    <style>
+        table {
+            border: 3px solid gray;
+            padding: 5px;
+            line-height: 1.5;
+            border-collapse: collapse;
+            margin: auto auto;
+            color: brown;
+            text-align: center;
+
+        }
+
+        table tr:nth-child(2n) {
+            background-color: #97CBFF;
+        }
+
+        table tr:nth-child(2n+1) {
+            background-color: #66B3FF;
+        }
+
+        tr,
+        td {
+            border: 1px solid gray;
+            width: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <th colspan="8">九九乘法表
+            <script>
+                for (let i = 1; i < 10; i++) {
+                    document.write("<tr>")
+                    for (let j = 2; j < 10; j++) {
+                        document.write("<td>");
+                        document.write(`${j}*${i}=${i * j}<br>`);
+                        document.write("</td>");
+                    }
+                    document.write("</tr>");
+                }
+
+            </script>
+        </th>
+    </table>
+</body>
+
+</html>
